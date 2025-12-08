@@ -35,7 +35,7 @@ static int current_column = 1;
 "*"        { return Parser::token::T_MUL; }
 "/"        { return Parser::token::T_DIV; }
 
-[-]?[0-9]+("."[0-9]+)? { yylval->emplace<float>(atof(yytext)); return Parser::token::T_LITERAL_FLOAT; }
+[0-9]+("."[0-9]+)? { yylval->emplace<float>(atof(yytext)); return Parser::token::T_LITERAL_FLOAT; }
 
 \n         { current_line++; current_column = 1; }
 \r         { current_column = 1; }
