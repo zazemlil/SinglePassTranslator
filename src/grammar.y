@@ -25,10 +25,8 @@
 }
 
 %token <float> T_LITERAL_FLOAT
-%left T_PLUS
-%left T_MINUS
-%left T_MUL
-%left T_DIV
+%left T_PLUS T_MINUS // low priority
+%left T_MUL T_DIV // high priority
 %token T_PARENTHESIS_OPEN
 %token T_PARENTHESIS_CLOSE
 %token T_END_OF_FILE
