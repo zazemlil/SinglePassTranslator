@@ -26,7 +26,8 @@
 
 %token <float> T_LITERAL_FLOAT
 %left T_PLUS T_MINUS // low priority
-%left T_MUL T_DIV // high priority
+%left T_MUL T_DIV // medium priority
+%right UMINUS // high priority
 %token T_PARENTHESIS_OPEN
 %token T_PARENTHESIS_CLOSE
 %token T_END_OF_FILE
@@ -45,7 +46,7 @@ expr: num { $$ = $1; }
     | expr T_MINUS expr { $$ = $1 - $3; }
     | expr T_MUL expr { $$ = $1 * $3; }
     | expr T_DIV expr { $$ = $1 / $3; }
-    | T_MINUS expr { $$ = -$2; }
+    | T_MINUS expr %prec UMINUS { $$ = -$2; }
     | T_PARENTHESIS_OPEN expr T_PARENTHESIS_CLOSE { $$ = $2; };
 
 num: T_LITERAL_FLOAT { $$ = $1; };
